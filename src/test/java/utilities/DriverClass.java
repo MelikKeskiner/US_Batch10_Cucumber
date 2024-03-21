@@ -58,4 +58,8 @@ public class DriverClass {
             threadDriver.set(null);
         }
     }
+    public static boolean runningOnIntelliJ(){ // checks if the test is being run by intellij
+        String classpath = System.getProperty("java.class.path");
+        return classpath.contains("idea_rt.jar");
+    }
 }
