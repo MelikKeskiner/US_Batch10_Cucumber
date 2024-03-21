@@ -2,6 +2,7 @@ package utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
@@ -25,7 +26,11 @@ public class DriverClass {
         if (threadDriver.get() == null) {
             switch (threadBrowserName.get()) {
                 case "chrome":
-                    threadDriver.set(new ChromeDriver());
+                    ChromeOptions options = new ChromeOptions();
+                    if (!runningOnIntelliJ()){
+                        options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=1400,2400");
+                    }
+                    threadDriver.set(new ChromeDriver(options));
                     break;
                 case "firefox":
                     threadDriver.set(new FirefoxDriver());
